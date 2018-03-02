@@ -7,3 +7,29 @@
 //
 
 import Foundation
+
+let dataModelDidUpdateNotification = "dataModelDidUpdateNotification"
+
+class DataModel {
+    static var sharedInstance = DataModel()
+    private init() { }
+    
+    
+    func requestData() {
+        
+    }
+    
+    private (set) var data: String? {
+        didSet {
+            NotificationCenter.default.post(name:
+                NSNotification.Name(rawValue: dataModelDidUpdateNotification), object: nil)
+            
+        }
+    }
+    
+     func getDataUpdate() {
+        if let data = DataModel.sharedInstance.data {
+            print(data)
+        }
+    }
+}
